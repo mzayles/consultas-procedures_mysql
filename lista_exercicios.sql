@@ -45,3 +45,10 @@ SELECT produto, SUM(receita) AS total_receita
 FROM vendas
 GROUP BY produto
 HAVING total_receita > 10000.00;
+
+-- Ex. 10
+SELECT a.nome, count(autor._id) AS quantidade_livros
+FROM autores a
+JOIN livros l ON a.id = l.autor_id
+GROUP BY a.nome
+HAVING quantidade_livros > 2;

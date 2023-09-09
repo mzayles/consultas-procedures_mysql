@@ -22,3 +22,9 @@ WHERE curso = 'Engenharia de Software';
 SELECT produto, SUM(receita) AS total_receita
 FROM vendas
 GROUP BY produto;
+
+-- Ex. 06
+SELECT a.nome, COUNT(autor_id) AS total_livros
+FROM autores a 
+INNER JOIN livros l ON a.id = l.autor_id
+GROUP BY a.nome;

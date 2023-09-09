@@ -57,3 +57,8 @@ HAVING quantidade_livros > 2;
 SELECT a.nome, l.titulo
 FROM autores a
 INNER JOIN livros l ON a.id = l.autor_id;
+
+-- Ex. 12
+SELECT a.nome, m.curso
+FROM alunos a
+INNER JOIN matriculas m ON a.id = m.aluno_id;

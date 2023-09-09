@@ -88,3 +88,10 @@ WHERE id = (
     ORDER BY COUNT(*) DESC
     LIMIT 1
 );
+
+-- Ex. 17
+SELECT produto, SUM(receita) AS total_vendas
+FROM vendas
+GROUP BY produto
+ORDER BY total_vendas
+LIMIT 1;

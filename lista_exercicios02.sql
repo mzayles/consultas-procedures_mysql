@@ -132,3 +132,27 @@ END;
 DELIMITER ;
 
 CALL sp_autorAntigo();
+
+-- Ex. 09
+DELIMITER //
+CREATE PROCEDURE sp_LivrosAteAno(IN ano_publicado INT)
+BEGIN
+	SELECT l.Titulo, l.Ano_Publicacao
+	FROM Livro l
+	WHERE l.Ano_Publicacao < ano_publicado
+    ORDER BY l.Ano_Publicacao;
+END;
+//
+DELIMITER ;
+
+CALL sp_LivrosAteAno(2005);
+
+-- DELIMITER: usado para alterar o delimitador padrão de comandos SQL (que normalmente é ;). Neste caso, ele define
+o delimitador como //.
+-- CREATE PROCEDURE: é o início da definição da procedure. 
+-- BEGIN: marca o início do bloco de código da procedure.
+-- SELECT: dentro da procedure, há uma consulta SQL SELECT que seleciona os campos Titulo e Ano_Publicacao da tabela
+Livro onde o valor da coluna Ano_Publicacao é menor que o valor passado como parâmetro ano_publicado.
+-- END: marca o fim do bloco de código da procedure.
+-- DELIMITER ;: restaura o delimitador padrão para ;.
+-- CALL sp_LivrosAteAno(2005): chama a procedure sp_LivrosAteAno e passa o valor 2005 como o valor do parâmetro ano_publicado.

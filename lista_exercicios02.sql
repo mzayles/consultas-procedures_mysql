@@ -38,3 +38,28 @@ END;
 DELIMITER ;
 
 CALL sp_ContarLivrosPorCategoria('Autoajuda');
+
+-- Ex. 04
+DELIMITER //
+CREATE PROCEDURE sp_VerificarLivrosCategoria(IN nm_categoria VARCHAR(50), OUT ex_livros ENUM('sim', 'não'))
+BEGIN
+    DECLARE qtd_livros INT;
+
+	SELECT COUNT(l.Categoria_ID) AS qtd_livros
+    INTO qtd_livros
+    FROM Categoria c
+    INNER JOIN Livro l ON c.Categoria_ID = l.Categoria_ID
+    WHERE c.Nome = nm_categoria
+    GROUP BY c.Nome;
+   
+    IF qtd_livros > 0 THEN
+		SET ex_livros = 'sim';
+	ELSE
+		SET ex_livros = 'não';
+	END IF;
+END;
+//
+DELIMITER ;
+
+CALL sp_VerificarLivrosCategoria('Romance', @ex_livros);
+SELECT @ex_livros;

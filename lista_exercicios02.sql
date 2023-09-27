@@ -156,3 +156,17 @@ Livro onde o valor da coluna Ano_Publicacao é menor que o valor passado como pa
 -- END: marca o fim do bloco de código da procedure.
 -- DELIMITER ;: restaura o delimitador padrão para ;.
 -- CALL sp_LivrosAteAno(2005): chama a procedure sp_LivrosAteAno e passa o valor 2005 como o valor do parâmetro ano_publicado.
+
+-- Ex. 10
+DELIMITER //
+CREATE PROCEDURE sp_LivrosESeusAutores()
+BEGIN
+	SELECT l.Titulo, a.Nome, a.Sobrenome
+    FROM Livro l
+    INNER JOIN Autor_Livro ON l.Livro_ID = Autor_Livro.Livro_ID
+    INNER JOIN Autor a ON a.Autor_ID = Autor_Livro.Autor_ID;
+END;
+//
+DELIMITER ;
+
+CALL sp_LivrosESeusAutores();

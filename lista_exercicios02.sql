@@ -116,3 +116,19 @@ DELIMITER ;
 
 CALL sp_AdicionarLivro('Tudo é rio');
 SELECT l.Titulo FROM Livro l;
+
+-- Ex. 08
+DELIMITER //
+CREATE PROCEDURE sp_autorAntigo()
+BEGIN
+	SELECT Nome, Sobrenome
+    FROM Autor
+    WHERE Data_Nascimento = (
+		SELECT MIN(Data_Nascimento)
+        FROM Autor
+	);
+END;
+//
+DELIMITER ;
+
+CALL sp_autorAntigo();
